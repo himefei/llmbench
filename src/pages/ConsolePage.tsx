@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { BENCHMARKS, type BenchmarkKey } from '../../shared/benchmarks'
 import type { DraftModel } from '../lib/leaderboard'
 import { createModel, deleteModel, fetchAdminModels, fetchSession, login, logout, updateModel } from '../lib/api'
+import { clearKonamiActivation } from '../hooks/useKonamiGate'
 import { createEmptyDraft, draftToPayload, formatScore, modelToDraft } from '../lib/leaderboard'
 
 export function ConsolePage() {
@@ -88,6 +89,7 @@ export function ConsolePage() {
 
   async function handleLogout() {
     await logout()
+    clearKonamiActivation()
     setIsAuthenticated(false)
     setExpiresAt(null)
     setModels([])
@@ -174,10 +176,10 @@ export function ConsolePage() {
       <section className="console-login-card">
         <div className="section-copy">
           <p className="eyebrow">Private admin console</p>
-          <h1>Protected by an environment-variable password.</h1>
+          <h1>Sequence accepted. Enter the environment password.</h1>
           <p>
-            Login uses a signed HttpOnly cookie. Failed attempts are tracked by IP in KV, with temporary blacklist support and
-            an optional manual blocklist.
+            The first gate is the hidden local input sequence. The second gate is the server-side password backed by a signed
+            HttpOnly cookie, plus IP tracking and lockout in KV.
           </p>
         </div>
 

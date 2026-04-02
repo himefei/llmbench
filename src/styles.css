@@ -158,6 +158,18 @@ img {
   color: var(--primary-deep);
 }
 
+.nav-link-secret {
+  background: linear-gradient(135deg, rgba(24, 30, 58, 0.96), rgba(45, 71, 162, 0.9));
+  color: #f7fbff;
+  box-shadow: 0 10px 24px rgba(23, 37, 84, 0.28);
+}
+
+.nav-link-secret:hover,
+.nav-link-secret.active {
+  background: linear-gradient(135deg, rgba(19, 28, 63, 0.96), rgba(52, 84, 191, 0.96));
+  color: #ffffff;
+}
+
 .page-frame {
   padding: 1rem 0 3rem;
 }
@@ -270,9 +282,27 @@ img {
   color: var(--danger);
 }
 
+.button-arcade {
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(30, 64, 175, 0.92));
+  color: #f8fbff;
+  border: 1px solid rgba(125, 211, 252, 0.28);
+}
+
 .hero-card__panel {
   display: grid;
   gap: 1rem;
+}
+
+.secret-access-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  background: rgba(14, 24, 46, 0.8);
+  color: rgba(240, 247, 255, 0.9);
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  font-size: 0.9rem;
 }
 
 .stat-grid {
@@ -506,6 +536,42 @@ img {
   gap: 1rem;
 }
 
+.console-locked-card {
+  display: grid;
+  gap: 1rem;
+  max-width: 840px;
+  margin: 2rem auto 0;
+  padding: 1.4rem;
+  border-radius: 1.8rem;
+  border: 1px solid rgba(16, 35, 63, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(240, 245, 255, 0.76));
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow);
+}
+
+.console-locked-panel {
+  display: grid;
+  gap: 0.45rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.4rem;
+  background: rgba(11, 20, 40, 0.92);
+  color: #ecf5ff;
+  border: 1px solid rgba(87, 123, 255, 0.24);
+}
+
+.console-locked-panel p {
+  margin: 0;
+  color: rgba(219, 233, 255, 0.75);
+}
+
+.console-locked-led {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 999px;
+  background: #4ade80;
+  box-shadow: 0 0 18px rgba(74, 222, 128, 0.8);
+}
+
 .console-sidebar,
 .console-editor,
 .console-login-card {
@@ -656,7 +722,13 @@ img {
   .console-sidebar,
   .benchmark-card,
   .matrix-card,
-  .console-login-card {
+  .console-login-card,
+  .console-locked-card {
     border-radius: 1.4rem;
+  }
+
+  .secret-access-chip {
+    width: 100%;
+    border-radius: 1rem;
   }
 }

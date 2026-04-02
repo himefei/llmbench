@@ -7,7 +7,11 @@ import { ModelMatrix } from '../components/ModelMatrix'
 import { fetchLeaderboard } from '../lib/api'
 import { formatScore, formatTimestamp, getInitials } from '../lib/leaderboard'
 
-export function HomePage() {
+interface HomePageProps {
+  konamiActivated: boolean
+}
+
+export function HomePage({ konamiActivated }: HomePageProps) {
   const [data, setData] = useState<LeaderboardResponse | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -55,12 +59,16 @@ export function HomePage() {
             Cloudflare Pages deployment with a private admin console.
           </p>
           <div className="hero-actions">
-            <Link className="button button-primary" to="/console">
-              Open console
-            </Link>
-            <a className="button button-secondary" href="#benchmarks">
+            <a className="button button-primary" href="#benchmarks">
               View benchmarks
             </a>
+            {konamiActivated ? (
+              <Link className="button button-secondary button-arcade" to="/console">
+                Console unlocked
+              </Link>
+            ) : (
+              <div className="secret-access-chip">Hidden admin access enabled by local sequence input.</div>
+            )}
           </div>
         </div>
 
@@ -143,7 +151,7 @@ export function HomePage() {
       {data && data.models.length === 0 && !isLoading ? (
         <div className="empty-panel">
           <h3>No models yet</h3>
-          <p>Deploy this site, open the console, and add your first model with scores across the eight built-in benchmarks.</p>
+          <p>Deploy this site, unlock the console, and add your first model with scores across the eight built-in benchmarks.</p>
         </div>
       ) : null}
 

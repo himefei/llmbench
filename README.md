@@ -6,6 +6,7 @@ A modern leaderboard for large-model evaluation scores, built for Cloudflare Pag
 
 - Public leaderboard homepage with benchmark cards and a cross-benchmark matrix.
 - Private admin console at `/console` for adding, editing, and deleting model entries.
+- Hidden admin entry gate triggered by the Konami Code before the password form is revealed.
 - Password login backed by `ADMIN_PASSWORD` and a signed `HttpOnly` session cookie.
 - IP-based brute-force protection using Cloudflare KV.
 - Optional manual IP blacklist via env var or KV keys.
@@ -119,6 +120,7 @@ Each model entry stores:
 ## Security notes
 
 - The admin session is stored in a signed `HttpOnly` cookie, not in `localStorage` or `sessionStorage`.
+- The admin route is hidden behind a local Konami Code gate before the password challenge is shown.
 - Login attempts are checked server-side.
 - State-changing admin requests require a valid signed session.
 - Same-origin checks are enforced for admin mutations.
