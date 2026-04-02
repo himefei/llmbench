@@ -1,6 +1,7 @@
 import { type CSSProperties } from 'react'
 import type { BenchmarkKey } from '../../shared/benchmarks'
 import type { ModelRecord } from '../../shared/types'
+import { useLanguage } from '../lib/language'
 import { formatScore, getInitials } from '../lib/leaderboard'
 
 interface BenchmarkCardProps {
@@ -8,12 +9,14 @@ interface BenchmarkCardProps {
     key: BenchmarkKey
     label: string
     description: string
+    descriptionZh: string
     accent: string
   }
   models: ModelRecord[]
 }
 
 export function BenchmarkCard({ benchmark, models }: BenchmarkCardProps) {
+  const { language } = useLanguage()
   const ranked = models
     .filter((model) => model.scores[benchmark.key] !== null)
     .sort((left, right) => (right.scores[benchmark.key] ?? 0) - (left.scores[benchmark.key] ?? 0))
@@ -24,9 +27,9 @@ export function BenchmarkCard({ benchmark, models }: BenchmarkCardProps) {
       <div className="benchmark-card__header">
         <div>
           <p className="eyebrow">{benchmark.label}</p>
-          <h3>{benchmark.description}</h3>
+          <h3>{language === 'zh' ? benchmark.descriptionZh : benchmark.description}</h3>
         </div>
-        <span className="badge">{ranked.length || 0} models</span>
+        <span className="badge">{language === 'zh' ? `${ranked.length || 0} 个模型` : `${ranked.length || 0} models`}</span>
       </div>
 
       {ranked.length > 0 ? (
@@ -41,7 +44,7 @@ export function BenchmarkCard({ benchmark, models }: BenchmarkCardProps) {
                   </span>
                   <div>
                     <strong>{model.name}</strong>
-                    <small>{model.provider || `Rank ${index + 1}`}</small>
+                    <small>{model.provider || (language === 'zh' ? `第 ${index + 1} 名` : `Rank ${index + 1}`)}</small>
                   </div>
                 </div>
                 <div className="bar-track">
@@ -54,7 +57,7 @@ export function BenchmarkCard({ benchmark, models }: BenchmarkCardProps) {
         </div>
       ) : (
         <div className="empty-panel compact">
-          No data for this benchmark yet. Add your first model from the admin console.
+          {language === 'zh' ? '这个 benchmark 还没有数据，先去后台添加模型与得分。' : 'No data for this benchmark yet. Add your first model from the admin console.'}
         </div>
       )}
     </section>

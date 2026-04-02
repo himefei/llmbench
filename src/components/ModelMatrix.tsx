@@ -1,5 +1,6 @@
 import { BENCHMARKS } from '../../shared/benchmarks'
 import type { ModelRecord } from '../../shared/types'
+import { useLanguage } from '../lib/language'
 import { formatScore, getInitials } from '../lib/leaderboard'
 
 interface ModelMatrixProps {
@@ -7,6 +8,7 @@ interface ModelMatrixProps {
 }
 
 export function ModelMatrix({ models }: ModelMatrixProps) {
+  const { language } = useLanguage()
   if (models.length === 0) {
     return null
   }
@@ -14,16 +16,16 @@ export function ModelMatrix({ models }: ModelMatrixProps) {
   return (
     <section className="matrix-card">
       <div className="section-copy">
-        <p className="eyebrow">Cross-benchmark view</p>
-        <h2>Model matrix</h2>
+        <p className="eyebrow">{language === 'zh' ? '全项目矩阵' : 'Cross-benchmark view'}</p>
+        <h2>{language === 'zh' ? '模型成绩矩阵' : 'Model matrix'}</h2>
       </div>
 
       <div className="table-wrap">
         <table className="matrix-table">
           <thead>
             <tr>
-              <th>Model</th>
-              <th>Overall</th>
+              <th>{language === 'zh' ? '模型' : 'Model'}</th>
+              <th>{language === 'zh' ? '总分' : 'Overall'}</th>
               {BENCHMARKS.map((benchmark) => (
                 <th key={benchmark.key}>{benchmark.label}</th>
               ))}
@@ -39,7 +41,7 @@ export function ModelMatrix({ models }: ModelMatrixProps) {
                     </span>
                     <div>
                       <strong>{model.name}</strong>
-                      <small>{model.provider || 'Independent'}</small>
+                      <small>{model.provider || (language === 'zh' ? '独立条目' : 'Independent')}</small>
                     </div>
                   </div>
                 </td>

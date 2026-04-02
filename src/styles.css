@@ -102,6 +102,12 @@ img {
   padding: 1.25rem 0 0.5rem;
 }
 
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .brand {
   display: flex;
   gap: 0.9rem;
@@ -145,6 +151,16 @@ img {
   backdrop-filter: blur(18px);
 }
 
+.language-toggle {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--primary-deep);
+  border-radius: 999px;
+  padding: 0.7rem 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .nav-link {
   padding: 0.55rem 0.95rem;
   border-radius: 999px;
@@ -185,6 +201,7 @@ img {
 .console-sidebar,
 .console-editor,
 .console-login-card,
+.compare-card,
 .spotlight-card {
   position: relative;
   border: 1px solid var(--border);
@@ -199,6 +216,123 @@ img {
   gap: 1.2rem;
   padding: 1.5rem;
   border-radius: 2rem;
+}
+
+.compare-card {
+  padding: 1.4rem;
+  border-radius: 1.9rem;
+}
+
+.compare-card__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.compare-card__meta {
+  display: inline-flex;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--primary-deep);
+  font-weight: 700;
+}
+
+.compare-selector-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 1rem 0 1.1rem;
+}
+
+.compare-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 35, 63, 0.1);
+  background: rgba(255, 255, 255, 0.86);
+  color: #20314d;
+  cursor: pointer;
+}
+
+.compare-chip.active {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: rgba(37, 99, 235, 0.24);
+}
+
+.compare-chip__dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 999px;
+}
+
+.compare-chart-wrap {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.compare-group {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem 0.9rem;
+  border-radius: 1.4rem;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(16, 35, 63, 0.08);
+}
+
+.compare-bars {
+  min-height: 16rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(42px, 1fr));
+  gap: 0.65rem;
+  align-items: end;
+}
+
+.compare-bar-column {
+  display: grid;
+  gap: 0.45rem;
+  align-items: end;
+}
+
+.compare-bar-value,
+.compare-bar-model,
+.compare-group__label small {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.compare-bar-track {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  height: 12rem;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(228, 236, 248, 0.5), rgba(210, 221, 238, 0.9));
+  padding: 0.4rem;
+}
+
+.compare-bar {
+  width: 100%;
+  border-radius: 0.8rem 0.8rem 0.25rem 0.25rem;
+  min-height: 0.8rem;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.compare-bar-empty {
+  background: rgba(141, 159, 188, 0.35);
+}
+
+.compare-bar-model {
+  word-break: break-word;
+}
+
+.compare-group__label {
+  display: grid;
+  gap: 0.25rem;
 }
 
 .hero-card__copy,
@@ -687,7 +821,8 @@ img {
   .hero-card,
   .console-layout,
   .spotlight-grid,
-  .benchmark-grid {
+  .benchmark-grid,
+  .compare-chart-wrap {
     grid-template-columns: 1fr;
   }
 
@@ -701,6 +836,11 @@ img {
     flex-direction: column;
     align-items: stretch;
     gap: 1rem;
+  }
+
+  .site-header__actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .field-grid,
@@ -723,6 +863,7 @@ img {
   .benchmark-card,
   .matrix-card,
   .console-login-card,
+  .compare-card,
   .console-locked-card {
     border-radius: 1.4rem;
   }
