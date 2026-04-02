@@ -3,21 +3,9 @@
   "name": "llmbench",
   "compatibility_date": "2026-04-02",
   "pages_build_output_dir": "dist",
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "llmbench",
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
-      "preview_database_id": "DB"
-    }
-  ],
-  "kv_namespaces": [
-    {
-      "binding": "SECURITY_KV",
-      "id": "REPLACE_WITH_KV_NAMESPACE_ID",
-      "preview_id": "REPLACE_WITH_KV_NAMESPACE_ID"
-    }
-  ],
+  // Configure D1 and KV bindings in the Cloudflare Pages dashboard.
+  // Once you have real resource IDs and need Wrangler-managed bindings,
+  // add the d1_databases / kv_namespaces blocks back with valid IDs.
   "vars": {
     "SESSION_TTL_HOURS": "24",
     "ADMIN_IP_BLOCKLIST": ""

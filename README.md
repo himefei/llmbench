@@ -88,7 +88,7 @@ wrangler pages dev dist --binding=ADMIN_PASSWORD=your-password --binding=SESSION
 
 1. Create a D1 database named `llmbench`.
 2. Create a KV namespace for security state.
-3. Replace the placeholder IDs inside `wrangler.jsonc`.
+3. In the Pages dashboard, add a D1 binding named `DB` and a KV binding named `SECURITY_KV`.
 4. Add the environment variables listed above in the Pages dashboard.
 5. Apply the database migration remotely:
 
@@ -101,6 +101,8 @@ npm run db:migrate:remote
 ```bash
 npm run cf:deploy
 ```
+
+If you later want Wrangler-managed bindings in `wrangler.jsonc`, add your real D1 and KV IDs there. The checked-in config intentionally avoids placeholder IDs so Pages deployments do not fail before those resources are configured.
 
 ## Data model
 
