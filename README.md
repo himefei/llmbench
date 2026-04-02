@@ -105,6 +105,8 @@ npm run cf:deploy
 
 This repository does not commit a Wrangler configuration file. Cloudflare Pages dashboard settings are the source of truth for bindings and secrets.
 
+Client-side routes are intentionally kept minimal. The `_redirects` file rewrites `/console` to `index.html` without using a wildcard SPA fallback, which avoids redirect loops on Pages.
+
 ## Data model
 
 Each model entry stores:
