@@ -4,6 +4,8 @@ import type { ModelRecord } from '../../shared/types'
 import { useLanguage } from '../lib/language'
 import { formatScore } from '../lib/leaderboard'
 
+const CHART_PALETTE = ['#2563eb', '#0f9d8a', '#f97316', '#7c3aed', '#e11d48'] as const
+
 interface BenchmarkCompareChartProps {
   models: ModelRecord[]
 }
@@ -27,6 +29,12 @@ export function BenchmarkCompareChart({ models }: BenchmarkCompareChartProps) {
   const selectedModels = useMemo(
     () => selectedIds.map((id) => models.find((model) => model.id === id)).filter((model): model is ModelRecord => Boolean(model)),
     [models, selectedIds],
+  )
+
+  const colorByModelId = useMemo(
+    () =>
+      Object.fromEntries(selectedModels.map((model, index) => [model.id, CHART_PALETTE[index % CHART_PALETTE.length]])) as Record<string, string>,
+    [selectedModels],
   )
 
   function handleToggleModel(modelId: string) {
@@ -72,7 +80,7 @@ export function BenchmarkCompareChart({ models }: BenchmarkCompareChartProps) {
               onClick={() => handleToggleModel(model.id)}
               type="button"
             >
-              <span className="compare-chip__dot" style={{ background: model.color }} />
+              <span className="compare-chip__dot" style={{ background: colorByModelId[model.id] ?? CHART_PALETTE[0] }} />
               <span>{model.name}</span>
             </button>
           )
@@ -89,13 +97,14 @@ export function BenchmarkCompareChart({ models }: BenchmarkCompareChartProps) {
                 {selectedModels.map((model) => {
                   const value = model.scores[benchmark.key]
                   const height = value === null ? 6 : Math.max(10, value)
+                  const chartColor = colorByModelId[model.id] ?? CHART_PALETTE[0]
                   return (
                     <div className="compare-bar-column" key={`${benchmark.key}-${model.id}`}>
                       <span className="compare-bar-value">{formatScore(value)}</span>
                       <div className="compare-bar-track">
                         <div
                           className={value === null ? 'compare-bar compare-bar-empty' : 'compare-bar'}
-                          style={{ height: `${height}%`, background: value === null ? undefined : model.color }}
+                          style={{ height: `${height}%`, background: value === null ? undefined : `linear-gradient(180deg, ${chartColor}, color-mix(in srgb, ${chartColor} 62%, white))` }}
                         />
                       </div>
                       <span className="compare-bar-model">{model.name}</span>
