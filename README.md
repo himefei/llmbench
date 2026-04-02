@@ -38,7 +38,7 @@ Set these in Cloudflare Pages:
 - `SESSION_TTL_HOURS`: optional, defaults to `24`
 - `ADMIN_IP_BLOCKLIST`: optional comma-separated IP list
 
-Bindings:
+Bindings configured in the Cloudflare Pages dashboard:
 
 - `DB`: D1 database binding
 - `SECURITY_KV`: KV namespace binding for rate limiting and blacklist entries
@@ -88,8 +88,8 @@ wrangler pages dev dist --binding=ADMIN_PASSWORD=your-password --binding=SESSION
 
 1. Create a D1 database named `llmbench`.
 2. Create a KV namespace for security state.
-3. In the Pages dashboard, add a D1 binding named `DB` and a KV binding named `SECURITY_KV`.
-4. Add the environment variables listed above in the Pages dashboard.
+3. In your Pages project, add a D1 binding named `DB` and a KV binding named `SECURITY_KV` from `Settings -> Bindings`.
+4. Add the environment variables listed above in `Settings -> Variables and Secrets`.
 5. Apply the database migration remotely:
 
 ```bash
@@ -102,7 +102,7 @@ npm run db:migrate:remote
 npm run cf:deploy
 ```
 
-If you later want Wrangler-managed bindings in `wrangler.jsonc`, add your real D1 and KV IDs there. The checked-in config intentionally avoids placeholder IDs so Pages deployments do not fail before those resources are configured.
+This repository does not commit a Wrangler configuration file. Cloudflare Pages dashboard settings are the source of truth for bindings and secrets.
 
 ## Data model
 
